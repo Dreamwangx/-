@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-family:"微软雅黑";
+}
+.box{
+	width:800px;
+	margin:20px auto;
+	padding:200px 0;
+}
+.floor{
+	height:600px;
+	background:red;
+	margin:20px 0;
+	text-align:center;
+	line-height:600px;
+	color:#FFF;
+	font-size:100px;
+}
+.floor_ctrl{
+	width:40px;
+	text-align:center;
+	position:fixed;
+	bottom:50px;
+	left:50px;
+	width:0;
+	height:0;
+	opacity:0;
+	filter:alpha(opacity:0);
+}
+.floor_ctrl span{
+	margin-bottom:1px;
+	display:block;
+	color:#FFF;
+	line-height:40px;
+	height:40px;
+	background:#666;
+	cursor:pointer;
+}
+.floor_ctrl span:hover{
+	background:orange;
+}
+.floor_ctrl span.active{
+	background:orange;
+}
+</style>
+<script type="text/javascript" src="../day01/js/jquery.js"></script>
+<script>
+	$(function(){
+		console.log($(".floor_ctrl span"));
+		$(".floor_ctrl span").click(function(){
+			var $index = $(this).index();
+			var $top = $(".floor").eq($index).offset().top;
+			$("body,html").animate({scrollTop:$top},500);
+		});
+		$(window).scroll(function(){
+			var $offset = -$("body,html").offset().top;
+			clearTimeout($(".floor_ctrl")[0].timer);
+			$(".floor_ctrl")[0].timer=setTimeout(function(){
+				if($offset > 200){
+					$(".floor_ctrl").stop(true).animate({"width":40,"height":327,"opacity":1},300);
+					
+				}else{
+					$(".floor_ctrl").stop(true).animate({"width":0,"height":0,"opacity":0},300);
+				}
+			},150)
+			$(".floor_ctrl span").each(function(index) {
+				var $top = $(".floor").eq(index).offset().top;
+				if($offset >= $top-300){
+					$(this).addClass("active").siblings().removeClass("active");
+				}
+			});
+		});
+	});
+</script>
+</head>
+
+<body>
+<div class="box">
+	<div class="floor">1</div>
+	<div class="floor">2</div>
+	<div class="floor">3</div>
+	<div class="floor">4</div>
+	<div class="floor">5</div>
+	<div class="floor">6</div>
+	<div class="floor">7</div>
+	<div class="floor">8</div>
+</div>
+<div class="floor_ctrl">
+	<span class="active">1</span>
+	<span>2</span>
+	<span>3</span>
+	<span>4</span>
+	<span>5</span>
+	<span>6</span>
+	<span>7</span>
+	<span>8</span>
+</div>
+</body>
+</html>

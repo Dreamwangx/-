@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="../day01/js/jquery.min.js"></script>
+<script>
+$(function(){
+	console.log($('i.min').parents("p.parent").prev());
+});
+</script>
+</head>
+
+<body>
+<ul>
+	<li>
+		<div></div>
+		<p class="parent">
+			<span>
+				<i class="min">最小级</i>
+			</span>
+		</p>
+	</li>
+</ul>
+</body>
+</html>
